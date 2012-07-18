@@ -17,17 +17,19 @@ OrderedHash.prototype = {
 		this.init();
 	},
 	each: function(callback) {
-		for (var key in this._keys) {
+		for (var i=0; i<this.length; i++) {
+            var key = this._keys[i];
 			callback(key, this._values[key]);
 		}
 	},
 	each_key: function(callback) {
-		for (var key in this._keys) {
-			callback(key);
+		for (var i=0; i<this.length; i++) {
+			callback(this._keys[i]);
 		}
 	},
 	each_value: function(callback) {
-		for (var key in this._keys) {
+		for (var i=0; i<this.length; i++) {
+            var key = this._keys[i];
 			callback(this._values[key]);
 		}
 	},
