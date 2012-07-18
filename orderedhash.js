@@ -3,14 +3,15 @@ function isFunction(f) {
 	return f && getType.toString.call(f) == '[object Function]';
 };
 
-OrderedHash = function() {
+OrderedHash = OrderedHash = function() {
 	this.init();
 };
 
 OrderedHash.prototype = {
 	init: function() {
-		this._keys: [];
-		this._values: [];
+		this._keys = [];
+		this._values = [];
+		this.length = 0;
 	},
 	clear: function() {
 		this.init();
@@ -64,7 +65,7 @@ OrderedHash.prototype = {
 	},
 	has_value: function(value) {
 		for (var key in this._values) {
-			if (this._values[value) === value) 
+			if (this._values[key] === value) 
 			{
 				return true;
 			}
@@ -82,13 +83,24 @@ OrderedHash.prototype = {
 
 		this._keys.splice(index, 0, value);	
 		this._values[key] = value;
+		this.length++;
+	},
+	map: function(callback) {
+		var ret = [];
+
+		this.each(function(key, value) {
+			ret.push(callback(key, value));
+		});
+
+		return ret;		
 	},
 	remove: function(key) {
 		var index = this._keys.indexOf(key);
 
 		if (index > -1) {
-			this._keys.slice(index, 1);
+			this._keys.splice(index, 1);
 			delete this._values[key];
+			this.length--;
 		}
 	},
 	set: function(key, value){
@@ -96,12 +108,13 @@ OrderedHash.prototype = {
 
 		if (index < 0) {
 			this._keys.push(key);
+			this.length++;
 		};
 
-		this._values[key] = Value;
+		this._values[key] = value;
 	},	
 	shift: function() {
-		if (this.size(0 > 0) {
+		if (this.size() > 0) {
 			var key = this._keys[0];
 			var value = this._values[key];
 			this.remove(key);
@@ -127,5 +140,4 @@ OrderedHash.prototype = {
 	}
 };
 
-
-
+module.exports = exports = OrderedHash;
