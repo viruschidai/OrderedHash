@@ -4,7 +4,7 @@ var vows = require('vows'),
 var OrderedHash = require('./orderedhash');
 
 vows.describe('Ordered Hash').addBatch({
-    'Test hash operation methods': {
+    'Test basic methods': {
         topic: function() {
             var hash = new(OrderedHash);
             hash.set('k1', 'v1');
@@ -13,16 +13,32 @@ vows.describe('Ordered Hash').addBatch({
 
             return hash;
         },
-
-        'Method "clear" should remove all elements in the hash': function(hash) {
-            assert.equal(hash.size(), 3);
-            hash.clear();
-            assert.equal(hash.size(), 0);
-        },
-        'Method "insert" should insert an element to specified position': function(hash) {
-
+        'Operational methods': { 
+            'Method "insert" should insert an element to specified position': function(hash) {
+                hash.insert(0, 'k4', 'v4');
+                var ret = hash.shift().join('=');
+                assert.equal(ret, 'k4=v4');
+            },
+            'Method "fetch" should return the value for the spcified key': function(hash) {
+                var value = hash.fetch('k3');
+                assert.equal(value, 'v3');
+            },
+            'Method "fetch" should return default value when the key is not in the hash': function(hash) {
+                var value = hash.fetch('k6', 'v6');
+                assert.equal(value, 'v6');
+            },
+            'Method "fetch" should return result of passed in callback functin': function(hash) {
+                var value = hash.fetch('k7', function(key) {
+                    return 'LOL' + key;
+                });
+                assert.equal(value, 'LOLk7');
+            },
+            'Method "clear" should remove all elements in the hash': function(hash) {
+                assert.equal(hash.size(), 3);
+                hash.clear();
+                assert.equal(hash.size(), 0);
+            }
         }
-
     },
     'Test length and size() are correct': {
         topic: new(OrderedHash),
@@ -30,14 +46,17 @@ vows.describe('Ordered Hash').addBatch({
         'Length is correct after adding/removing elements?': function (hash) {
             hash.set('k1', 'v1');
             hash.set('k2', 'v2');
-            assert.equal(hash.length, 2)
+            assert.equal(hash.length, 2);
 
             hash.remove('k1');
-            assert.equal(hash.length, 1)
+            assert.equal(hash.length, 1);
 
             hash.set('k3', 'v3');
             hash.shift();
-            assert.equal(hash.length, 1)
+            assert.equal(hash.length, 1);
+
+            hash.insert(0, 'k0', 'v0');
+            assert.equal(hash.length, 2);
          },
          'Length equals size()': function(hash) {
             hash.set('k1', 'v1');
@@ -52,7 +71,6 @@ vows.describe('Ordered Hash').addBatch({
             assert.equal(hash.length, hash.size())
          }
     },
-
     'Test hash is ordered': {
         topic: new(OrderedHash),
 

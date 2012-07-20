@@ -37,13 +37,13 @@ OrderedHash.prototype = {
 		return this.size() === 0;	
 	}, 
 	fetch: function(key, block) {
-		if (this.has(key)) {
-			return this._values[key];
+		if (this.has_key(key)) {
+			return this.get(key); 
 		} else {
 			if (block === undefined) return null;
 			
 			if (isFunction(block)) {
-				return block();
+				return block(key);
 			} else {
 				return block;
 			}
@@ -63,7 +63,7 @@ OrderedHash.prototype = {
 		return this._values[key];
 	},
 	has_key: function(key) {
-		return this._keys.indexOf(key) > -1;
+		return (this._keys.indexOf(key) >= 0);
 	},
 	has_value: function(value) {
 		for (var key in this._values) {
@@ -83,7 +83,7 @@ OrderedHash.prototype = {
 			throw "Key[" + key + "] already exists";
 		};
 
-		this._keys.splice(index, 0, value);	
+		this._keys.splice(index, 0, key);	
 		this._values[key] = value;
 		this.length++;
 	},
