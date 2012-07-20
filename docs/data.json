@@ -1,0 +1,117 @@
+{
+    "project": {},
+    "files": {
+        "orderedhash.js": {
+            "name": "orderedhash.js",
+            "modules": {},
+            "classes": {
+                "OrderedHash": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "OrderedHash": {
+            "name": "OrderedHash",
+            "shortname": "OrderedHash",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "orderedhash.js",
+            "line": 6,
+            "description": "A hash that perservs the order of elements",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "orderedhash.js",
+            "line": 18,
+            "description": "Initialize the hash",
+            "itemtype": "method",
+            "name": "init",
+            "class": "OrderedHash"
+        },
+        {
+            "file": "orderedhash.js",
+            "line": 28,
+            "description": "Clear all elements in the hash",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "OrderedHash"
+        },
+        {
+            "file": "orderedhash.js",
+            "line": 36,
+            "description": "Calls callback function on each key in the hash, passing the key-value pair as parameters. \n\n     var hash =  new OrderedHash();\n     hash.set('key1', 'value1');\n     hash.set('key2', 'value2');\n     hash.each(function(key, value) {\n          console.log(key + ' = ' + value);\n     });",
+            "itemtype": "method",
+            "name": "each",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "A callback function will be called on each key-value pair.",
+                    "type": "Function"
+                }
+            ],
+            "class": "OrderedHash"
+        },
+        {
+            "file": "orderedhash.js",
+            "line": 55,
+            "description": "Calls callback function on each key in the hash, passing only the key as parameter. \n\n     var hash =  new OrderedHash();\n     hash.set('key1', 'value1');\n     hash.set('key2', 'value2');\n     hash.each_key(function(key) {\n          console.log('key = ' + key);\n     });",
+            "itemtype": "method",
+            "name": "each_key",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "A callback function will be called on each key",
+                    "type": "Function"
+                }
+            ],
+            "class": "OrderedHash"
+        },
+        {
+            "file": "orderedhash.js",
+            "line": 73,
+            "description": "Calls callback function on each value in the hash, passing only the value as parameter. \n\n     var hash =  new OrderedHash();\n     hash.set('key1', 'value1');\n     hash.set('key2', 'value2');\n     hash.each_value(function(value) {\n          console.log('value = ' + value);\n     });",
+            "itemtype": "method",
+            "name": "each_value",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "OrderedHash"
+        },
+        {
+            "file": "orderedhash.js",
+            "line": 92,
+            "description": "Check whether the hash is empty",
+            "itemtype": "method",
+            "name": "empty",
+            "return": {
+                "description": "Returns true when there is no element in the hash",
+                "type": "Boolean"
+            },
+            "class": "OrderedHash"
+        },
+        {
+            "file": "orderedhash.js",
+            "line": 101,
+            "description": "Fetch an element in the hash and do something else if the element does not exist\nfetch(key[, default])  \n\n     var hash =  new OrderedHash();\n     hash.set('key1', 'value1');\n     var value = hash.fetch('key2', 'value2');\n     console.log(value); // the value will be 'value2' although it does not exist in the hash\n  \nfetch(key, callback(key))\n\n     var hash =  new OrderedHash();\n     hash.set('key1', 'value1');\n     var value = hash.fetch('key2', function(key){\n          return 'value2';\n     });\n     console.log(value); // the value will be 'value2' although it does not exist in the hash",
+            "itemtype": "method",
+            "name": "fetch",
+            "return": {
+                "description": "Returns true when there is no element in the hash",
+                "type": "Boolean"
+            },
+            "class": "OrderedHash"
+        }
+    ]
+}
